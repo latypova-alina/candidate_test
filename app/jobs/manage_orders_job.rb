@@ -5,7 +5,7 @@ require "payment_reminder"
 class ManageOrdersJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     Customer.all.each do |customer|
       @logs = "Nightly routine for customer #{customer.id}...\n"
 
@@ -14,13 +14,13 @@ class ManageOrdersJob < ApplicationJob
         order.update_attribute(:active, false)
       end
 
-      # All the orders that are paid, but need delivery
+      #  All the orders that are paid, but need delivery
       customer.orders.paid.each do |order|
         order.product.ship_for(customer) unless simulate?
         order.update_attribute(:shipped_at, Time.now) unless simulate?
       end
 
-      # All the orders that are not paid
+      #  All the orders that are not paid
       customer.orders.not_paid.each do |order|
         if customer.orders.where("created_at > ?", Date.today.at_midnight).any?
           customer.send_invoice(order) unless simulate?
