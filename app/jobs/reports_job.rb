@@ -2,12 +2,12 @@ require "invoice_sender"
 require "payment_reminder"
 
 class ReportsJob < ApplicationJob
+  include ApplicationHelper
   queue_as :default
 
   def perform(*_args)
-    @logs = "Nightly routine for reporting to the line manager...\n"
     Report.send_to_line_manager unless simulate?
-    puts @logs
+    log("Nightly routine for reporting to the line manager...\n")
   end
 
   private
