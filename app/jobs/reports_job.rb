@@ -7,7 +7,8 @@ class ReportsJob < ApplicationJob
 
   def perform(*_args)
     Report.send_to_line_manager unless simulate?
-    log(I18n.t("manager_routine_message"))
+
+    Rails.logger.info(I18n.t("manager_routine_message"))
   end
 
   private

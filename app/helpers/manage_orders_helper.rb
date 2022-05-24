@@ -5,7 +5,7 @@ module ManageOrdersHelper
 
       yield
     end
-  rescue
-    log(I18n.t(error, order_id: @order.id))
+  rescue => e
+    Rails.logger.error(I18n.t(error, order_id: @order.id, error: e.class))
   end
 end

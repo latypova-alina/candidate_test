@@ -38,13 +38,13 @@ module ProcessOrders
     def send_invoice(order)
       order.customer.send_invoice(order) unless simulate
 
-      log(I18n.t("invoice_sent"))
+      Rails.logger.info(I18n.t("invoice_sent", customer_id: order.customer_id))
     end
 
     def send_reminder(order)
       PaymentReminder.new(order).send
 
-      log(I18n.t("reminder_sent"))
+      Rails.logger.info(I18n.t("reminder_sent", customer_id: order.customer_id))
     end
   end
 end

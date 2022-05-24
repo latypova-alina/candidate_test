@@ -1,5 +1,8 @@
 en:
   routine_message: Nightly routine for customer %{customer_id}...
-  invoice_sent: Invoice sent
-  reminder_sent: Reminder sent
+  invoice_sent: Invoice sent for customer %{customer_id}
+  reminder_sent: Reminder sent for customer %{customer_id}
   manager_routine_message: Nightly routine for reporting to the line manager...
+  invoice_error_message: Invoice sending failed for order %{order_id} with %{error}
+  reminder_error_message: Payment reminder is failed for order %{order_id} with %{error}
+  ship_error_message: Shipment is failed for order %{order_id} with %{error}
