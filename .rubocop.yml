@@ -30,3 +30,7 @@ Style/Documentation:
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: optional
+
