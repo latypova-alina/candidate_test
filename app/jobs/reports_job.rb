@@ -7,7 +7,7 @@ class ReportsJob < ApplicationJob
 
   def perform(*_args)
     Report.send_to_line_manager unless simulate?
-    log("Nightly routine for reporting to the line manager...\n")
+    log(I18n.t("manager_routine_message"))
   end
 
   private
