@@ -41,6 +41,7 @@ RSpec.describe Order, type: :model do
 
     describe "not_paid" do
       let!(:not_paid_order) { FactoryBot.create(:order, paid_at: nil) }
+      let!(:delivered_order) { FactoryBot.create(:order, paid_at: nil, delivered_at: Time.now) }
 
       before { create_list(:order, 2, :paid) }
 
