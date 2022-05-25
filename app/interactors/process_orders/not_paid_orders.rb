@@ -11,15 +11,22 @@ module ProcessOrders
 
     def call
       context.not_paid_orders = Order.not_paid
-      context.new_orders = not_paid_orders
-        .where("created_at > ?", Date.today.at_midnight)
-      context.old_orders = not_paid_orders.where.not(id: new_orders)
+      context.new_orders = new_orders_query
+      context.old_orders = old_orders_query
 
       process_new_orders
       process_old_orders
     end
 
     private
+
+    def new_orders_query
+      not_paid_orders.where("created_at > ?", Date.today.at_midnight)
+    end
+
+    def old_orders_query
+      not_paid_orders.where.not(id: new_orders)
+    end
 
     def process_new_orders
       process_orders(

@@ -45,6 +45,8 @@ describe ProcessOrders::NotPaidOrders do
   end
 
   context "when InvoiceSender is failed" do
+    let(:error_text) { "Invoice sending failed for order #{new_order.id} with Timeout::Error" }
+
     before do
       allow(InvoiceSender).to receive(:call).with(new_order).and_raise Timeout::Error
       allow(Rails.logger).to receive(:error).at_least(:once)
@@ -53,11 +55,13 @@ describe ProcessOrders::NotPaidOrders do
     it "logs an error" do
       call
 
-      expect(Rails.logger).to have_received(:error).with("Invoice sending failed for order #{new_order.id} with Timeout::Error").once
+      expect(Rails.logger).to have_received(:error).with(error_text).once
     end
   end
 
   context "when PaymentReminder is failed" do
+    let(:error_text) { "Payment reminder is failed for order #{old_order.id} with Timeout::Error" }
+
     before do
       allow(PaymentReminder).to receive(:new).with(old_order).and_return(payment_reminder)
       allow(payment_reminder).to receive(:send).and_raise Timeout::Error
@@ -67,7 +71,7 @@ describe ProcessOrders::NotPaidOrders do
     it "logs an error" do
       call
 
-      expect(Rails.logger).to have_received(:error).with("Payment reminder is failed for order #{old_order.id} with Timeout::Error").once
+      expect(Rails.logger).to have_received(:error).with(error_text).once
     end
   end
 end

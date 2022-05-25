@@ -9,6 +9,7 @@ module ProcessOrders
 
     def call
       return if simulate
+
       context.paid_orders ||= Order.paid
 
       ship

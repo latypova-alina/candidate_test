@@ -28,6 +28,8 @@ describe ProcessOrders::PaidOrders do
   end
 
   context "when ProductCarrier raises an error" do
+    let(:error_text) { "Shipment is failed for order #{paid_order.id} with Timeout::Error" }
+
     before do
       allow(ProductCarrier).to receive(:deliver).and_raise Timeout::Error
       allow(Rails.logger).to receive(:error).at_least(:once)
@@ -36,7 +38,7 @@ describe ProcessOrders::PaidOrders do
     it "logs an error" do
       call
 
-      expect(Rails.logger).to have_received(:error).with("Shipment is failed for order #{paid_order.id} with Timeout::Error").once
+      expect(Rails.logger).to have_received(:error).with(error_text).once
     end
   end
 end
