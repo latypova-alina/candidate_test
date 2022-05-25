@@ -33,3 +33,6 @@ Style/ClassAndModuleChildren:
 Naming/MemoizedInstanceVariableName:
   EnforcedStyleForLeadingUnderscores: optional
 
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
