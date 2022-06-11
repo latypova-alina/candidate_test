@@ -6,7 +6,7 @@ FactoryBot.define do
     address { "Customer address" }
   end
 
-  factory :product do 
+  factory :product do
     name { "Product name" }
   end
 

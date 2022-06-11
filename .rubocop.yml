@@ -1,0 +1,38 @@
+AllCops:
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - tmp/**/*
+  NewCops: disable
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 16
+
+Metrics/BlockLength:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  ConsistentQuotesInMultiline: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: optional
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
